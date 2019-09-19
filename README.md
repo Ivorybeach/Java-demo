@@ -1,2 +1,3 @@
 # Java-demo
-Java基础demo，切换分支可以看到不同demo
+Java基础demo
+集合 多线程 反射 动态代理 设计模式
