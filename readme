@@ -1,8 +1,120 @@
-javaè°ƒç”¨pythonè„šæœ¬ï¼š
 
-	Runtime:
-		ä»£è¡¨java applicationæ­£åœ¨è¿è¡Œæ—¶çš„ç±»ï¼Œå¯ä»¥é€šè¿‡è·å–æ­¤ç±»å®ä¾‹ï¼Œå³å¯åœ¨java applicationè¿è¡Œæ—¶æ‰§è¡Œå…¶ä»–å¤–éƒ¨ç¨‹åº
+1.Collection
+¼¯ºÏµÄroot interface(²»°üÀ¨Map)£¬¼Ì³ĞÁËIterator£¬¶¨ÒåÁËadd(),remove()ÕâĞ©·½·¨£¬²»Í¬ÀàĞÍµÄ¼¯ºÏ£¬¶ÔcollectionÖĞ·½·¨µÄÊµÏÖÓĞËù²»Í¬¡£
+
+2.Collections
+Collections¸øÎÒµÄ¸Ğ¾õ¾ÍÊÇÒ»¸ö¹¤¾ßÀà£¬ÀïÃæ¶¨ÒåÁË²Ù×÷¼¯ºÏµÄ·½·¨£¬Ò»°ãÀ´ËµCollectionµÄ×ÓÀà¼¯ºÏ(arrayList,hashMapµÈ)¶¼ÊÇ·ÇÏß³Ì°²È«µÄ£¬
+¾Í¿ÉÒÔÍ¨¹ıCollectionsÀ´»ñµÃÏàÓ¦µÄÏß³Ì°²È«Àà£¬ÔÚ±£Ö¤Ïß³Ì°²È«µÄÍ¬Ê±ĞÔÄÜµ±È»»áÊÜµ½Ó°Ïì¡£
+
+CollectionºÍCollectionsµÄÇø±ğ£ºCollectionÊÇ¼¯ºÏ×î»ù´¡µÄ¶¨Òå£¬¶øCollectionsÌá¹©ÁË²Ù×÷¼¯ºÏµÄ·½·¨£¬³ıÁË³¤µÃÏñµã£¬¸ù±¾¾ÍÊÇÁ½»ØÊÂ¡£
+
+3.List
+ÓĞĞò¼¯ºÏ(sequence)£¬ÔÊĞíÖØ¸´(duplicate)ÔªËØ£¬ÔÊĞí¶à¸önullÔªËØ¡£
+ÖµµÃÌáÒ»×ìµÄÊÇ£¬ListÓĞÒ»¸öµ¥¶ÀµÄµü´úÆ÷£ºListIterator
+
+4.ArrayList
+·ÇÏß³Ì°²È«¡£¿ÉÒÔÍ¨¹ıCollections»ñµÃÒ»¸ösynchronizedList¡£
+ÓĞĞò£¬ÔÊĞíÖØ¸´ÔªËØºÍnullÔªËØ¡£
+¼Ì³ĞÁËListºÍAbstractList£¬ÊÇÒ»¸ö³¤¶È¿É±äµÄÊı×é(resizable-array)¡£Ä¬ÈÏ³¤¶ÈÎª10¡£
+µ×²ã¾ÍÊÇÓÃÊı×éÀ´ÊµÏÖµÄ£¬Õâ¾ö¶¨ÁËÆä²éÑ¯¿ìµÄÌáµã¡£µ±ÔÚarrayListÌí¼ÓÔªËØÊ±£¬ÆäÊı×é³¤¶È»á×Ô¶¯Ôö³¤¡£
+ÔÚÌí¼ÓĞÂÔªËØÊ±³¬¹ıarrayListÔ­Ê¼ÈİÁ¿£¬²ÉÓÃÀ©³ä·½°¸½øĞĞÀ©Èİ¡£
+ArrayListµÄcapacity¾ÍÊÇÊı×éµÄsize¡£
+Ô´ÂëÖĞÒÑ¾­ËµÃ÷£º (This class is roughly equivalent to Vector, except that it is unsynchronized.)
+Vector(ÒÑ¹ıÊ±)ÊÇÏß³Ì°²È«µÄArrayList£¬ÆäÖĞËùÓĞ·½·¨¶¼¼ÓÁËsynchronized¡£´ËÍâ¶şÕßµÄÇø±ğ»¹ÔÚÓÚensureCapacity£¬VectorµÄÀ©Èİ·½°¸ÎªÔ­À´Á½±¶¡£
+
+5.LinkedList
+µ×²ãÊµÏÖÊÇË«ÏòÁ´±í(Doubly-linked)£¬ËùÒÔ²éÑ¯Âı£¬ÔöÉ¾¿ì¡£ÒòÎªÔÚ²éÑ¯Ê±Ö»ÄÜ´ÓÍ·Ò»¸öÒ»¸ö±éÀúÔªËØ¡£
+ÔÚeclipseÖĞ²é¿´LinkedListÀàµÄoutline£¬¿ÉÒÔ¿´µ½ÓĞfirst£¬last£¬nodeÕâĞ©£¬¿ÉÒÔÊµ´¸ÊÇÁ´±í¡£
+ÓĞĞò£¬ÔÊĞíÖØ¸´ÔªËØºÍNullÔªËØ¡£
+·ÇÏß³Ì°²È«£¬Í¬ÑùÊÇÍ¨¹ıcollections.synochronizedList(list)µÃµ½Ò»¸öÏß³Ì°²È«µÄlinkedList¡£
+
+
+6.Set
+²»¿ÉÖØ¸´(no dulicate elements)£¬SetÅĞ¶ÏÔªËØÊÇ·ñÖØ¸´ÒÀ¾İµÄÊÇequals()µÄ±È½Ï½á¹û£¬µ«»¹Òª¿¼ÂÇµ½hashCode¡£
+ÎŞĞò£¬×î¶àÔÊĞíÒ»¸önullÔªËØ¡£
+¶ÔÓÚÖØ¸´ÔªËØµÄÅĞ¶Ï£¬ÒªÍ¬Ê±ÅĞ¶Ïequals()ºÍhashCode¡£
+Set½Ó¿ÚµÄµ×²ãÊÇ¸ù¾İMap½Ó¿ÚÊµÏÖµÄ£ºTreeSet-TreeMap,HashSet-HashMap
+HashSetÖĞµÄÔªËØ¾ÍÊÇHashMapµÄkey£¬key²»¿ÉÒÔÖØ¸´£¬¿ÉÒÔÎªnull£¬¶ÔÓ¦HashSetÔªËØµÄÊôĞÔ£¬¿ÉÒÔÎªnull£¬²»¿ÉÒÔÖØ¸´¡£
+
+7.HashSet
+¼Ì³Ğ×ÔSet½Ó¿Ú£¬Æäµ×²ãÊµ¼ÊÊÇÒ»¸öHashMap£¬²é¿´ÆäÔ´Âë¿ÉÒÔ¿´µ½HashSetµÄ¹¹Ôì·½·¨ÊÇÖ±½ÓnewÒ»¸öHashMap(»òÊÇLinkedHashMap)³öÀ´¡£
+ÔÊĞínull element¡£¿ÉÒÔÖ¸¶¨³õÊ¼ÈİÁ¿int initialCapacity¡£
+·ÇÏß³Ì°²È«£¬¿ÉÒÔÍ¨¹ıcollectionsÀà½«Ò»¸öhashSet×ª»»ÎªÏß³Ì°²È«µÄsynchronizedSet£º
+Set<?> hashSet = new HashSet<?>;
+Set<?> safeHashSet = Collections.SynchronizedSet(hashSet);
+²»¹ıÏàÓ¦µÄ£¬hashSetµÄĞÔÄÜÒ²»áÊÜµ½Ó°Ïì£¬Ò»°ãÇé¿öÏÂ£¬»¹ÊÇÊ¹ÓÃjava.util.concurrent°üÖĞµÄÀàÀ´½â¾ö¼¯ºÏµÄ²¢·¢ÎÊÌâ¡£
+HashSetÖĞµÄÄÚÈİÊÇ²»¿ÉÖØ¸´µÄ£¬HashSetÅĞ¶Ï¶ÔÏóÊÇ·ñÖØ¸´µÄÊÇ¸ù¾İequals()ºÍhashCodeÀ´ÅĞ¶Ï£º
+µ±hashCodeÏàÍ¬£¬±íÊ¾Í¬Ò»¶ÔÏó¡£
+µ±hashCode²»Í¬£¬ÓÃequals()·½·¨À´±È½Ï£¬·µ»ØÎªture£¬±íÊ¾ÏàÍ¬ÔªËØ£¬·µ»Øfalse£¬±íÊ¾²»Í¬ÔªËØ¡£
+Èç¹û´æÈëµÄÊÇ×Ô¶¨Òå¶ÔÏó£¬ÎªÁË±£Ö¤hashSet¶Ô¶ÔÏóÊÇ·ñÖØ¸´µÄÕıÈ·ÅĞ¶Ï£¬Ó¦¸ÃÔÚpoÀàÖĞÖØĞ´hashCodeºÍequals()·½·¨
+
+8.LinkedHashSet
+¼Ì³ĞÁËHashSetºÍSet½Ó¿Ú£¬µ×²ãÎªË«²ãÁ´±í(doubly-linked)+hashËã·¨
+
+9.TreeSet
+µ×²ãÊÇÍ¨¹ıtreeMapÀ´ÊµÏÖµÄ£¬¿ÉÒÔ¿´µ½Ö±½ÓnewÒ»¸ötreeMap³öÀ´¡£
+´æÈëÆäÖĞµÄÔªËØ»á±»ÅÅĞò£¬Í¨¹ı±È½ÏÆ÷Comparator»òÕßComparable½Ó¿ÚµÄcompareTo()·½·¨¡£
+ÔªËØ²»¿ÉÖØ¸´£¬·ÇÏß³Ì°²È«¡£
+TreeSetÔÚÊ¹ÓÃµÄÊ±ºò±ØĞëÒª´«ÈëComparator»òÕßÔªËØ±ØĞë¼Ì³ĞComparable½Ó¿Ú²¢¸´Ğ´CompareTo()·½·¨£¬¿É¿´×÷ÊÇ¶¨ÒåÅÅĞò¹æÔò¡£
+ps£º¼¯ºÏÖĞ´æ·ÅµÄ¶¼ÊÇ¶ÔÏó£¬TreeSet´æÈë¼òµ¥ÀàĞÍ(int,char)µÈ£¬Ò²»á×ª³ÉInteger£¬¶øIntegerÀà±¾ÉíÒÑ¾­ÊµÏÖÁËComparable½Ó¿Ú£¬¸´Ğ´ÁËcompareTo()
+·½·¨£¬ËùÒÔÔÚ´æÈë×Ô¶¨Òå¶ÔÏóÊ±£¬Ò»¶¨Òª¼ÇµÃÉÏÃæµÄÒªÇó¡£
+
+10.Map
+key-valueĞÎÊ½£¬key²»¿ÉÒÔÖØ¸´£¬¿ÉÒÔÎªnull£¨Ö»ÄÜÓĞÒ»¸ö£¿ÕâÑùËµÊÇÒòÎªHashSetÖ»ÄÜÓĞÒ»¸önull£©
+ÑÏ¸ñÀ´Ëµ Map ²¢²»ÊÇÒ»¸ö¼¯ºÏ£¬¶øÊÇÁ½¸ö¼¯ºÏÖ®¼ä µÄÓ³Éä¹ØÏµ¡£ÕâÁ½¸ö¼¯ºÏÃ¿Ò»ÌõÊı¾İÍ¨¹ıÓ³Éä¹ØÏµ£¬ÎÒÃÇ¿ÉÒÔ¿´³ÉÊÇÒ»ÌõÊı¾İ¡£
+¼´ Entry(key,value£©¡£Map ¿ÉÒÔ¿´³ÉÊÇÓÉ¶à¸ö Entry ×é³É¡£
+×¢ÒâMap²¢Ã»ÓĞ¼Ì³ĞIterator½Ó¿Ú£¬Æä¼Ì³ĞÀàÒ²¶¼Ã»ÓĞÊµÏÖIterator½Ó¿Ú
+×¢ÒâÒ»¸ö·½·¨£ºSet<Map.Entry<K, V>> entrySet(),EntryÊÇÓÃÀ´´æ·Å¼üÖµ¶Ô(key-value pair)µÄ
+Õâ¸ö·½·¨·µ»ØÒ»¸ö·ºĞÍÎªEntryµÄSet¼¯ºÏ£¬ÒòÎªMapÃ»ÓĞÊµÏÖIteraotr½Ó¿Ú£¬ËùÒÔ¿ÉÒÔÓÃIteratorÀ´±éÀúSetÖĞµÄEntry
+
+11.HashMap
+ÔÊĞíkeyºÍvalue¾ùÎªnull£¬key²»¿ÉÒÔÖØ¸´£¬Ö»ÄÜÓĞÒ»¸önull
+·ÇÏß³Ì°²È«£¬Connections.synchronizedMap()
+ÔÚ´´½¨HashMapÊ±¿ÉÒÔ¼ÓÈëinitial capacity¡¢load factorÁ½¸ö²ÎÊı£º
+initial capacity:³õÊ¼ÈİÁ¿£¬Ä¬ÈÏ16
+load factor:¾ö¶¨ÔÚÔªËØ´ïµ½¶àÉÙÊ±¿ªÊ¼À©Èİ£¬Ä¬ÈÏ0.75
+
+
+12.hashTable
+Ïß³Ì°²È«£¬²»ÔÊĞíÈÎÒâkeyºÍvalueÎªNull
+
+12.LinkedHashMap
+¼Ì³ĞÁËHashMapºÍMap£¬ÔÊĞíkeyºÍvalue¾ùÎªnull£¬
+
+13.TreeMap
+·ÇÏß³Ì°²È«
+»á¶ÔÔªËØ¸ù¾İkey½øĞĞÅÅĞò
+´æÈë×Ô¶¨Òå¶ÔÏóĞèÒªComparator»òÊÇÊµÏÖComparable½Ó¿Ú
+
+
+
+
+
+
+hashSet¡¢hashMap
+	hashSetµÄµ×²ãÊµÏÖÊÇhashMap,¹ÊÒÔÏÂÍ¨ÏòÊÊÓÃÓÚhashMap
+	hashSet²»ÔÊĞíÔªËØÖØ¸´£¬ÅĞ¶ÏÒª´æÈëµÄÔªËØÊÇ·ñÖØ¸´Ê¹ÓÃhashCode()ºÍequals()·½·¨
+	µ±hashCodeÏàÍ¬Ê±£¬±íÊ¾Í¬Ò»ÔªËØ
+	µ±hashcode²»Í¬£¬±È½Ïequal()
+		equal()·µ»ØÎªtrue£¬ÄÇÃ´Á½¸ö¶ÔÏóµÄhashCodeÒ»¶¨ÏàÍ¬£¬ËùÒÔ±íÊ¾ÏàÍ¬ÔªËØ
+		equal()·µ»ØÎªfalse£¬±íÊ¾²»Í¬ÔªËØ£¬ÕâÖÖÇé¿öÏÂ½«ÔªËØ´æÈëÁ´±íÖĞ£¬Ó¦µ±±ÜÃâÕâÖÖÇé¿ö
 	
-	Processor:
-		æ‰§è¡Œå…¶ä»–ç¨‹åºï¼Œå¹¶ä¸”èƒ½è·å–å…¶ä»–ç¨‹åºçš„çŠ¶æ€ï¼Œæ˜¯å¦æ‰§è¡Œå®Œæ¯•ï¼Œé€šè¿‡è¾“å…¥æµã€è¾“å‡ºæµæ¥è·å–ç¨‹åºè¿è¡Œçš„ç»“æœ
-		
+	Èç¹ûÔÚhashSetÖĞ´æÈëµÄÊÇ×Ô¶¨Òå¶ÔÏó£¬ÎªÁËÈ·±£hashSetµÄÔªËØ²»ÖØ¸´£¬ĞèÒªÖØĞ´equal()ºÍhashCode()½øĞĞÅĞ¶Ï
+	
+
+treeSet¡¢treeMap
+	treeSetÊµÏÖÁËÅÅĞò£¬ĞèÒªÆäÖĞµÄ¶ÔÏóÖØĞ´compareTo()¶¨ÒåÅÅĞò¹æÔò
+	¼¯ºÏÖĞ´æÈëµÄÖ»ÄÜÊÇ¶ÔÏó£¬´æÈëÆäÖĞµÄ»ù±¾Êı¾İÀàĞÍÈçint»á×ª»¯ÎªInteger
+	IntegerÕâĞ©Àà¶¼¼Ì³ĞÁËComparable½Ó¿Ú£¬Í¬Ê±ÖØĞ´ÁËcompareTo()·½·¨
+	µ±ÔÚtreeSet¡¢treeMapÖĞ´æÈë×Ô¶¨Òå¶ÔÏóÊ±£¬±ØĞëÒª£º
+		1.¼Ì³ĞComparable()½Ó¿ÚÖØĞ´CompareTo()·½·¨
+		2.Ö±½ÓÊ¹ÓÃ±È½ÏÆ÷ComparatorÖØĞ´ComparaTo()·½·¨
+	×¢Òâ£º´æÈë×Ô¶¨Òå¶ÔÏóÊ±£¬±ØĞëÊ¹ÓÃÉÏÊöÁ½ÖÖ·½Ê½Ö®Ò»ÖØĞ´ComparaTo()£¬¶¨ÒåÅÅĞò¹æÔò
+	
+arrayListµÄÏß³Ì°²È«ÀàÊÇVector£¬hashMapµÄÏß³Ì°²È«ÀàÊÇHashTable;concurrentHashMapÏß³Ì°²È«¡¢Ğ§ÂÊ¸ßÓÚhashTable
+µ«ÊÇVectorºÍHashTableĞ§ÂÊµÍÏÂ£¬ÇÒÒ×Òı·¢Ïß³Ì°²È«ÎÊÌâ
+jdk1.5ºóÒıÈëjava.util.Concurrent°üÀ´Ìá¹©Ğ§ÂÊ¸ßµÄÍ¬²½¼¯ºÏ
+	
+
+	
+	
