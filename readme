@@ -1,120 +1,85 @@
+四种基本IO：
+	InputStream、OutputStream 基于字节操作的 IO，操作字符，数字，二进制图片
+	Writer、Reader 基于字符操作的 IO，操作中文，字符
+	File 基于磁盘操作的 IO
+	Socket 基于网络操作的 IO
 
-1.Collection
-集合的root interface(不包括Map)，继承了Iterator，定义了add(),remove()这些方法，不同类型的集合，对collection中方法的实现有所不同。
-
-2.Collections
-Collections给我的感觉就是一个工具类，里面定义了操作集合的方法，一般来说Collection的子类集合(arrayList,hashMap等)都是非线程安全的，
-就可以通过Collections来获得相应的线程安全类，在保证线程安全的同时性能当然会受到影响。
-
-Collection和Collections的区别：Collection是集合最基础的定义，而Collections提供了操作集合的方法，除了长得像点，根本就是两回事。
-
-3.List
-有序集合(sequence)，允许重复(duplicate)元素，允许多个null元素。
-值得提一嘴的是，List有一个单独的迭代器：ListIterator
-
-4.ArrayList
-非线程安全。可以通过Collections获得一个synchronizedList。
-有序，允许重复元素和null元素。
-继承了List和AbstractList，是一个长度可变的数组(resizable-array)。默认长度为10。
-底层就是用数组来实现的，这决定了其查询快的提点。当在arrayList添加元素时，其数组长度会自动增长。
-在添加新元素时超过arrayList原始容量，采用扩充方案进行扩容。
-ArrayList的capacity就是数组的size。
-源码中已经说明： (This class is roughly equivalent to Vector, except that it is unsynchronized.)
-Vector(已过时)是线程安全的ArrayList，其中所有方法都加了synchronized。此外二者的区别还在于ensureCapacity，Vector的扩容方案为原来两倍。
-
-5.LinkedList
-底层实现是双向链表(Doubly-linked)，所以查询慢，增删快。因为在查询时只能从头一个一个遍历元素。
-在eclipse中查看LinkedList类的outline，可以看到有first，last，node这些，可以实锤是链表。
-有序，允许重复元素和Null元素。
-非线程安全，同样是通过collections.synochronizedList(list)得到一个线程安全的linkedList。
-
-
-6.Set
-不可重复(no dulicate elements)，Set判断元素是否重复依据的是equals()的比较结果，但还要考虑到hashCode。
-无序，最多允许一个null元素。
-对于重复元素的判断，要同时判断equals()和hashCode。
-Set接口的底层是根据Map接口实现的：TreeSet-TreeMap,HashSet-HashMap
-HashSet中的元素就是HashMap的key，key不可以重复，可以为null，对应HashSet元素的属性，可以为null，不可以重复。
-
-7.HashSet
-继承自Set接口，其底层实际是一个HashMap，查看其源码可以看到HashSet的构造方法是直接new一个HashMap(或是LinkedHashMap)出来。
-允许null element。可以指定初始容量int initialCapacity。
-非线程安全，可以通过collections类将一个hashSet转换为线程安全的synchronizedSet：
-Set<?> hashSet = new HashSet<?>;
-Set<?> safeHashSet = Collections.SynchronizedSet(hashSet);
-不过相应的，hashSet的性能也会受到影响，一般情况下，还是使用java.util.concurrent包中的类来解决集合的并发问题。
-HashSet中的内容是不可重复的，HashSet判断对象是否重复的是根据equals()和hashCode来判断：
-当hashCode相同，表示同一对象。
-当hashCode不同，用equals()方法来比较，返回为ture，表示相同元素，返回false，表示不同元素。
-如果存入的是自定义对象，为了保证hashSet对对象是否重复的正确判断，应该在po类中重写hashCode和equals()方法
-
-8.LinkedHashSet
-继承了HashSet和Set接口，底层为双层链表(doubly-linked)+hash算法
-
-9.TreeSet
-底层是通过treeMap来实现的，可以看到直接new一个treeMap出来。
-存入其中的元素会被排序，通过比较器Comparator或者Comparable接口的compareTo()方法。
-元素不可重复，非线程安全。
-TreeSet在使用的时候必须要传入Comparator或者元素必须继承Comparable接口并复写CompareTo()方法，可看作是定义排序规则。
-ps：集合中存放的都是对象，TreeSet存入简单类型(int,char)等，也会转成Integer，而Integer类本身已经实现了Comparable接口，复写了compareTo()
-方法，所以在存入自定义对象时，一定要记得上面的要求。
-
-10.Map
-key-value形式，key不可以重复，可以为null（只能有一个？这样说是因为HashSet只能有一个null）
-严格来说 Map 并不是一个集合，而是两个集合之间 的映射关系。这两个集合每一条数据通过映射关系，我们可以看成是一条数据。
-即 Entry(key,value）。Map 可以看成是由多个 Entry 组成。
-注意Map并没有继承Iterator接口，其继承类也都没有实现Iterator接口
-注意一个方法：Set<Map.Entry<K, V>> entrySet(),Entry是用来存放键值对(key-value pair)的
-这个方法返回一个泛型为Entry的Set集合，因为Map没有实现Iteraotr接口，所以可以用Iterator来遍历Set中的Entry
-
-11.HashMap
-允许key和value均为null，key不可以重复，只能有一个null
-非线程安全，Connections.synchronizedMap()
-在创建HashMap时可以加入initial capacity、load factor两个参数：
-initial capacity:初始容量，默认16
-load factor:决定在元素达到多少时开始扩容，默认0.75
-
-
-12.hashTable
-线程安全，不允许任意key和value为Null
-
-12.LinkedHashMap
-继承了HashMap和Map，允许key和value均为null，
-
-13.TreeMap
-非线程安全
-会对元素根据key进行排序
-存入自定义对象需要Comparator或是实现Comparable接口
-
-
-
-
-
-
-hashSet、hashMap
-	hashSet的底层实现是hashMap,故以下通向适用于hashMap
-	hashSet不允许元素重复，判断要存入的元素是否重复使用hashCode()和equals()方法
-	当hashCode相同时，表示同一元素
-	当hashcode不同，比较equal()
-		equal()返回为true，那么两个对象的hashCode一定相同，所以表示相同元素
-		equal()返回为false，表示不同元素，这种情况下将元素存入链表中，应当避免这种情况
+File类：实现Synchorizable接口和Comparable接口
 	
-	如果在hashSet中存入的是自定义对象，为了确保hashSet的元素不重复，需要重写equal()和hashCode()进行判断
+	abstarct pathname:这玩意到底是什么？我的理解是，就是new File(String pathname)中的pathname
+	原因：构建一个file后，调用file.isAbsolute()，判断给出的abstract pathname是否为绝对路径，由这个方法的说明可以知道：
+	传递的pathname参数就是abstract pathname。
+	
+	File.separator分割符
+
+RandomAccessFile:
+
+Piped IO:
+	看一下字节流能否转换为字符流
 	
 
-treeSet、treeMap
-	treeSet实现了排序，需要其中的对象重写compareTo()定义排序规则
-	集合中存入的只能是对象，存入其中的基本数据类型如int会转化为Integer
-	Integer这些类都继承了Comparable接口，同时重写了compareTo()方法
-	当在treeSet、treeMap中存入自定义对象时，必须要：
-		1.继承Comparable()接口重写CompareTo()方法
-		2.直接使用比较器Comparator重写ComparaTo()方法
-	注意：存入自定义对象时，必须使用上述两种方式之一重写ComparaTo()，定义排序规则
-	
-arrayList的线程安全类是Vector，hashMap的线程安全类是HashTable;concurrentHashMap线程安全、效率高于hashTable
-但是Vector和HashTable效率低下，且易引发线程安全问题
-jdk1.5后引入java.util.Concurrent包来提供效率高的同步集合
-	
+传统IO：
+	File：用于文件或者目录的描述信息，例如生成新目录，修改文件名，删除文件，判断文件所在路径等。
+	InputStream：抽象类、基于字节的输入操作、是所有输入流的父类、定义了所有输入流都具有的共同特征。
+	OutputStream：抽象类、基于字节的输出操作、是所有输出流的父类、定义了所有输出流都具有的共同特征。
+	Reader：抽象类、基于字符的输入操作；
+	Writer：抽象类、基于字符的输出操作；
+	RandomAccessFile：功能丰富，可以从文件的任意位置进行存取（输入输出）操作；
 
+Writer:
+	字符流(character streams)抽象类，定义了write(),flush(),close()等抽象方法
+	Writer的不同实现类，针对不同的操作对象和目标对象，(file,管道，网络)，而对上述方法进行不同的实现
 	
+OutputStreamWriter：
+	继承Writer，作用是将字节流转换为字符流.
+	源码：OutputStreamWriter is bridge from character stream to byte stream.
+	可以指定charset
+	
+FileWriter
+	继承OutputStreamWriter
+	以character来写入file
+	其charset和buffer大小为默认，不可通过构造器指定
+
+StringWriter,StringReader：操作对象为字符串
+
+BufferWriter,BufferReader,BufferOutputStream,BufferInputStream:
+	其他流可以通过此类转换为使用buffer的流
+	在对流进行写入时提供一个buffer来提高IO效率。在进行磁盘或网络IO时，原始的InputStream对数据读取的过程都是一个字节一个字节操作的，
+	而BufferedInputStream在其内部提供了一个buffer，在读数据时，会一次读取一大块数据到buffer中，这样比单字节的操作效率要高的多，
+	特别是进程磁盘IO和对大量数据进行读写的时候。
+	BufferReader额外提供readline()方法，可以读一行
+
+
+缓冲区：
+	避免对磁盘的重复读写，而是将内容读到一定大小的缓冲区中(缓冲区在内存)，等缓冲区满之后一次性写入硬盘；
+	flush()为清空缓冲区，在缓冲区未满时，强制将缓冲区内容写入硬盘；
+	
+flush()
+	为输出流Writer,OutPutStream所有
+	flush()意思是把缓冲区的内容强制的写出。 因为操作系统的某些机制，为了防止一直不停地磁盘读写，所以有了延迟写入的概念,
+	(注意不要和frush()刷新混淆了)，主要用在IO中，即清空缓冲区数据，一般在读写流(stream)的时候，数据是先被读到了内存中，再把数据
+	写到文件中，当你数据读完的时候不代表你的数据已经写完了，因为还有一部分有可能会留在内存这个缓冲区中。这时候如果你调用了close()方法
+	关闭了读写流，那么这部分数据就会丢失，所以应该在关闭读写流之前先flush()。
+	所以flush()在buffered流中使用才有意义
+
+InputStream:
+	read()	//返回下一个byte,如果最后一个返回-1
+	read(byte[] b)	//将内容读取到byte中
+
+
+
+
+
+字节流：
+	inputStream 读
+	outputStream 写
+字符流：
+	Reader 读
+	Writer 写
+	
+字节/字符流的操作对象：
+	文件file
+	管道pipe
+	网络连接
+	内存缓存 
 	
