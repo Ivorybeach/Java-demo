@@ -1,85 +1,81 @@
-四种基本IO：
-	InputStream、OutputStream 基于字节操作的 IO，操作字符，数字，二进制图片
-	Writer、Reader 基于字符操作的 IO，操作中文，字符
-	File 基于磁盘操作的 IO
-	Socket 基于网络操作的 IO
+生产者与消费者案例--synchronized
+	生产者每生产一个产品，消费者取走，生产者再生产，消费者再取走
 
-File类：实现Synchorizable接口和Comparable接口
+进程和线程：
+	线程可以看作是对进程的再划分，比如eclipse是一个进程，而eclipse提供的各种功能就是一个个小小的线程
+	进程应当是独立的应用程序，而线程，同类的进程能够共享同一块内存空间，这样在各个线程之间切换时，负担比进程之间的切换小
+	进程为独立运行，而线程之间可能会相互影响，考虑到死锁和线程之间的通信，多线程就是多个线程同时运行
+
+实现多线程的两种方法：
+	继承Thread类
+	继承Runnable接口(推荐)
+
+线程的基本状态
+	创建，创建一个Thread对象，Thread thread = new Thread();
+	就绪，执行start()方法，进入就绪状态，等待cpu资源
+	执行，执行run()方法的内容，线程只能从就绪状态进入执行
+	阻塞，
+		1.获取synchronized同步锁
+		2.wait()线程等待，notify()唤醒后进入就绪状态，准备运行
+		3.执行sleep()、join()方法
+	死亡，线程执行完毕，或异常导致退出
+
+线程和CPU：
+	CPU分时调度：所有线程轮流使用 CPU 的使用权，平均分配每个线程占用 CPU 的时间。
+	CPU抢占式调度：优先让优先级高的线程使用 CPU，如果线程的优先级相同，那么会随机选择一个(线程随机性)，Java使用的为抢占式调度。
+	CPU使用抢占式调度模式在多个线程间进行着高速的切换。对于CPU的一个核而言，某个时刻，只能执行一个线程，而 CPU的在多个线程间切换速度非常快，看上去就是在同一时刻运行。
+	多线程程序并不能提高程序的运行速度，但能够提高程序运行效率，让CPU的使用率更高。
+
+
+
+run()方法为线程要执行的内容
+在TestDemo2卖票案例中，ticket--，的过程如下：
+    取得原有ticket值
+    计算i -1
+    对i进行赋值
+这样多个线程执行run()中的操作时，一个线程执行ticket--时，可能还没有执行完，另外一个线程就过来再执行ticket--，这样就导致ticket
+数量不会递减，因为那个线程执行到ticket--那个步骤并不确定。
+加上synchronized关键字之后，当前线程会拿到锁，只有此线程执行完之后释放锁，其他线程才可以继续执行。
+
+线程停止：
+	执行完run()方法之后，线程终止
+	interuppt()终止线程：Interrupt()不会真正的终止线程，只是为线程增加一个终止标记，线程无法自己终止，只有开发者利用终止标记来用
+	break或return等终止线程。本质上是用结束run()方法来停止线程。
+
+线程优先级：priority：
+	MAX_PRIORITY	10
+	NORM_PRIORITY	5
+	MIN_PRIORITY	1
+
+同步：
+synchronized:
+	锁的释放是自动完成的
+	加锁，对象锁
 	
-	abstarct pathname:这玩意到底是什么？我的理解是，就是new File(String pathname)中的pathname
-	原因：构建一个file后，调用file.isAbsolute()，判断给出的abstract pathname是否为绝对路径，由这个方法的说明可以知道：
-	传递的pathname参数就是abstract pathname。
+ReetrantLock
+	ReetrantLock(boolean)，true，当多个线程等待锁时，会把锁给等待时间最长的线程	
+
+wait(),notify():
+	在sychonized中使用，在sychonized中，线程获得了锁，wait()方法获得锁的线程释放锁，线程进入等待阻塞状态，notify()唤醒等待中的线程，
+	唤醒之后，notify()不会立即释放锁，执行完毕之后释放锁。
+	比如两个线程生产者和消费者，要求生产者生产一个，消费者取走一个，在生产者线程生产完毕之后，调用wait()进行等待，这时消费者拿到锁，开始
+	取走，取完之后notify()(或者直接notify(),因为消费者只有执行取走工作完毕后，才会释放锁)，唤醒等待阻塞状态的生产者，释放锁，这时生产
+	者开始重新生产。
+
+wait()、notify()定义在Object类中：
+	wait()、notify()针对的是对象的同步锁，wait()使线程进入等待状态，同时释放锁，否则其他线程不能获取
+	到资源，notify()唤醒时根据的是对象的同步锁。必须让锁定的对象来调用wait()、notify()方法，所以应在
+	Object类中
+	wait()、notify()必须在synchronized中使用
+	notify()调用后不会立即释放锁，必须等待同步内容(synchcronized代码块)执行完后释放
+	当线程呈wait状态时，对线程对象调用interrupt方法会出现InterrupedException异常。
 	
-	File.separator分割符
-
-RandomAccessFile:
-
-Piped IO:
-	看一下字节流能否转换为字符流
 	
-
-传统IO：
-	File：用于文件或者目录的描述信息，例如生成新目录，修改文件名，删除文件，判断文件所在路径等。
-	InputStream：抽象类、基于字节的输入操作、是所有输入流的父类、定义了所有输入流都具有的共同特征。
-	OutputStream：抽象类、基于字节的输出操作、是所有输出流的父类、定义了所有输出流都具有的共同特征。
-	Reader：抽象类、基于字符的输入操作；
-	Writer：抽象类、基于字符的输出操作；
-	RandomAccessFile：功能丰富，可以从文件的任意位置进行存取（输入输出）操作；
-
-Writer:
-	字符流(character streams)抽象类，定义了write(),flush(),close()等抽象方法
-	Writer的不同实现类，针对不同的操作对象和目标对象，(file,管道，网络)，而对上述方法进行不同的实现
+join()
+	在线程A执行的时候，碰到了B线程.join方法时，A线程就会等待，等B线程执行完，才继续执行
 	
-OutputStreamWriter：
-	继承Writer，作用是将字节流转换为字符流.
-	源码：OutputStreamWriter is bridge from character stream to byte stream.
-	可以指定charset
+synchronized方法和synchronized(this)代码块
+	synchronized方法是对整个方法加锁，synchronized(this)是对特定的代码加锁
 	
-FileWriter
-	继承OutputStreamWriter
-	以character来写入file
-	其charset和buffer大小为默认，不可通过构造器指定
-
-StringWriter,StringReader：操作对象为字符串
-
-BufferWriter,BufferReader,BufferOutputStream,BufferInputStream:
-	其他流可以通过此类转换为使用buffer的流
-	在对流进行写入时提供一个buffer来提高IO效率。在进行磁盘或网络IO时，原始的InputStream对数据读取的过程都是一个字节一个字节操作的，
-	而BufferedInputStream在其内部提供了一个buffer，在读数据时，会一次读取一大块数据到buffer中，这样比单字节的操作效率要高的多，
-	特别是进程磁盘IO和对大量数据进行读写的时候。
-	BufferReader额外提供readline()方法，可以读一行
-
-
-缓冲区：
-	避免对磁盘的重复读写，而是将内容读到一定大小的缓冲区中(缓冲区在内存)，等缓冲区满之后一次性写入硬盘；
-	flush()为清空缓冲区，在缓冲区未满时，强制将缓冲区内容写入硬盘；
-	
-flush()
-	为输出流Writer,OutPutStream所有
-	flush()意思是把缓冲区的内容强制的写出。 因为操作系统的某些机制，为了防止一直不停地磁盘读写，所以有了延迟写入的概念,
-	(注意不要和frush()刷新混淆了)，主要用在IO中，即清空缓冲区数据，一般在读写流(stream)的时候，数据是先被读到了内存中，再把数据
-	写到文件中，当你数据读完的时候不代表你的数据已经写完了，因为还有一部分有可能会留在内存这个缓冲区中。这时候如果你调用了close()方法
-	关闭了读写流，那么这部分数据就会丢失，所以应该在关闭读写流之前先flush()。
-	所以flush()在buffered流中使用才有意义
-
-InputStream:
-	read()	//返回下一个byte,如果最后一个返回-1
-	read(byte[] b)	//将内容读取到byte中
-
-
-
-
-
-字节流：
-	inputStream 读
-	outputStream 写
-字符流：
-	Reader 读
-	Writer 写
-	
-字节/字符流的操作对象：
-	文件file
-	管道pipe
-	网络连接
-	内存缓存 
+volatile
 	

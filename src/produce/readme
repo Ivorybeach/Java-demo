@@ -1,0 +1,24 @@
+消费者和生产者案例
+	生产者每生产一个，消费者取走，消费者取走之后，生产者再生产
+
+	
+思考：
+	wait()和notify()要在synchronized的基础上，
+	那么synchronized要在那里
+	案例中生产者和消费者共享同一份数据，也就是product，所以synchronized要加在product上啊
+	
+	
+	 
+	为什么要在while/if判断中执行wait()呢
+	
+	如果在while/if中放业务代码的话，不管业务代码有没有执行，wait(),notify()都会执行
+	
+	
+	在调用wait()之前，线程必须获得该对象级别锁，这是一个很重要的地方，很多时候我们可能会忘记这一点，即只能在同步方法或同步块中调用wait()方法。
+	
+	synchronized(this)一定不能滥用，必须要确定this对象指的是谁，
+	要注意的地方有两点：
+	1.执行synchronized代码块的对象和调用wait/notify的对象是同一个
+	2.如果是两个线程进行通信，必须保证两个线程获取的是同一个对象的监视器，否则，一个线程notify不会唤醒另一个wait的线程
+	这样wait线程一直处于阻塞状态
+	如果是用eclipse，没有及时终止terminal程序，javaw.exe会一直后台运行，运行多此程序，存在多个javaw.exe进程。

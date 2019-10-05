@@ -1,0 +1,5 @@
+
+不管是synchronized还是lock:
+一定要明确被上锁的是谁：
+	消费者和生产者共同操作产品，要获取的对象锁是产品（product）
+	所以lock应该放在Product类中，这样线程执行到lock代码，会获取到lock所在对象的锁
